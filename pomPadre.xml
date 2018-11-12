@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.profuturo</groupId>
+  <artifactId>BranchOfficeRH</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+  <name>BranchOfficeRH</name>  
+  
+  <properties>
+		<!-- java version -->
+		<java.min.version>1.7</java.min.version>
+		<maven.min.version>3.5.0</maven.min.version>
+		<servlet-api.version>3.1.0</servlet-api.version>		
+		<!-- Java EE 5 -->
+		<javaee.version>5</javaee.version>		
+		<jersey.version>1.19</jersey.version>		
+		<json-simple.version>1.1.1</json-simple.version>
+		<log4j-version>1.2.17</log4j-version>	
+			
+
+		<!--Maven plugin versions -->
+		<war-plugin-version>3.1.0</war-plugin-version>
+		<ear-plugin-version>2.10.1</ear-plugin-version>
+		<ejb-plugin-version>3.0.0</ejb-plugin-version>
+		<compiler-plugin-version>3.6.1</compiler-plugin-version>
+		<dependency-plugin-version>3.0.1</dependency-plugin-version>
+		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+		<!-- encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>		
+ 	</properties>
+ 	<build>
+		<pluginManagement>
+			<!-- war plugin -->
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${war-plugin-version}</version>
+					<configuration>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+					</configuration>
+				</plugin>
+				<!-- ear plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>${ear-plugin-version}</version>
+				</plugin>
+				<!-- ejb plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>${ejb-plugin-version}</version>
+					<configuration>
+						<ejbVersion>3.0</ejbVersion>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+			<plugins>
+				<!-- Compiler Plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${compiler-plugin-version}</version>
+					<configuration>
+						<source>${java.min.version}</source>
+						<target>${java.min.version}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<compilerArgument>-Xlint:all</compilerArgument>
+						<showWarnings>true</showWarnings>
+						<showDeprecation>true</showDeprecation>
+						<compilerArguments>
+							<endorseddirs>${endorsed.dir}</endorseddirs>
+						</compilerArguments>
+					</configuration>
+				</plugin>
+							
+			</plugins>
+	</build>
+	<dependencyManagement>
+		<dependencies>			
+			<dependency>
+				<groupId>javaee</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${javaee.version}</version>
+				<scope>provided</scope>
+			</dependency>			
+			<dependency>
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			    <version>${log4j-version}</version>
+			</dependency>			
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>BranchOfficeDTO</module>
+		<module>BranchOfficeEJB</module>
+		<module>BranchOfficeRest</module>
+		<module>BranchOfficeRHEAR</module>		
+	</modules>
+</project>
